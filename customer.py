@@ -1,6 +1,4 @@
 from rental import Rental
-from movie import Movie
-import logging
 
 
 class Customer:
