@@ -37,3 +37,12 @@ class CustomerTest(unittest.TestCase):
         matches = re.match(pattern, stmt.replace('\n', ''), flags=re.DOTALL)
         self.assertIsNotNone(matches)
         self.assertEqual("12.00", matches[1])
+
+    def test_total_amount(self):
+        self.c.add_rental(Rental(self.new_movie, 1))
+        self.assertEqual(3.00, self.c.total_amount())
+        self.c.add_rental(Rental(self.regular_movie, 10))
+        self.assertEqual(17.00, self.c.total_amount())
+        self.c.add_rental(Rental(self.childrens_movie, 4))
+        self.assertEqual(20.00, self.c.total_amount())
+
