@@ -1,20 +1,88 @@
+from abc import ABC, abstractmethod
+
+
+class PriceStrategy(ABC):
+    """Abstract base class for rental pricing."""
+    _instance = None
+
+    @classmethod
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = super(PriceStrategy, cls).__new__(cls)
+        return cls._instance
+
+    @abstractmethod
+    def get_price(self, days: int) -> float:
+        """The price of this movie rental."""
+        pass
+
+    @abstractmethod
+    def get_rental_points(self, days: int) -> int:
+        """The frequent renter points earned for this rental."""
+        pass
+
+
+class NewRelease(PriceStrategy):
+    """Pricing rules for New Release movies."""
+
+    def get_rental_points(self, days):
+        """New release rentals earn 1 point for each day rented."""
+        return days
+
+    def get_price(self, days):
+        """return rental price for a new release"""
+        return 3.0 * days
+
+
+class RegularPrice(PriceStrategy):
+    """Pricing rules for Regular movies."""
+
+    def get_rental_points(self, days):
+        """Regular rentals earn 1 point regardless of days rented."""
+        return 1
+
+    def get_price(self, days):
+        """Regular rentals cost $2 for the first 2 days, then $1.5 per day."""
+        if days <= 2:
+            return 2.0
+        return 2.0 + (days - 2) * 1.5
+
+
+class ChildrensPrice(PriceStrategy):
+    """Pricing rules for Children's movies."""
+
+    def get_rental_points(self, days):
+        """Children's rentals earn 1 point regardless of days rented."""
+        return 1
+
+    def get_price(self, days):
+        """Children's rentals cost $1.5 for the first 3 days, then $1.5 per day."""
+        if days <= 3:
+            return 1.5
+        return 1.5 + (days - 3) * 1.5
+
+
 class Movie:
     """
     A movie available for rent.
     """
-    # The types of movies (price_code). 
-    REGULAR = 0
-    NEW_RELEASE = 1
-    CHILDRENS = 2
 
-    def __init__(self, title, price_code):
+    NEW_RELEASE = NewRelease()
+    REGULAR = RegularPrice()
+    CHILDRENS = ChildrensPrice()
+
+    def __init__(self, title: str, price_strategy: PriceStrategy):
         """Initialize a new movie."""
         self.title = title
-        self.price_code = price_code
+        self.price_strategy = price_strategy
 
-    def get_price_code(self):
-        """get the price code"""
-        return self.price_code
+    def get_rental_points(self, days_rented: int):
+        """Get the rental points for renting this movie for a number of days."""
+        return self.price_strategy.get_rental_points(days_rented)
+
+    def get_price(self, days: int):
+        """Get the price for renting this movie for a number of days."""
+        return self.price_strategy.get_price(days)
 
     def get_title(self):
         return self.title
