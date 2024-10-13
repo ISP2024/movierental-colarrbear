@@ -1,7 +1,3 @@
-import logging
-from movie import Movie
-
-
 class Rental:
     """
     A rental of a movie by customer.
