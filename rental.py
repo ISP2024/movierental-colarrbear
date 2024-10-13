@@ -48,12 +48,10 @@ class Rental:
                 f"Movie {self.movie} has unrecognized priceCode {self.movie.get_price_code()}")
         return amount
 
-    def rental_points(self, frequent_renter_points):
-        # compute the frequent renter points based on movie price code
+    def get_rental_points(self):
+        """compute the frequent renter points based on movie price code"""
         if self.movie.get_price_code() == Movie.NEW_RELEASE:
             # New release earns 1 point per day rented
-            frequent_renter_points += self.days_rented
-        else:
-            # Other rentals get only 1 point
-            frequent_renter_points += 1
-        return frequent_renter_points
+            return self.get_days_rented()
+        else:  # Other rentals get only 1 point
+            return 1
