@@ -7,6 +7,7 @@ from movie import Movie
 class RentalTest(unittest.TestCase):
 
     def setUp(self):
+        """Create some movies for testing"""
         self.new_movie = Movie("Dune: Part Two", Movie.NEW_RELEASE)
         self.regular_movie = Movie("Air", Movie.REGULAR)
         self.childrens_movie = Movie("Frozen", Movie.CHILDRENS)
@@ -18,6 +19,7 @@ class RentalTest(unittest.TestCase):
         self.assertEqual(Movie.REGULAR, m.get_price_code())
 
     def test_rental_price(self):
+        """Test the price calculation for each movie type"""
         rental = Rental(self.new_movie, 1)
         self.assertEqual(rental.get_price(), 3.0)
         rental = Rental(self.new_movie, 5)
