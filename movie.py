@@ -14,6 +14,10 @@ class Movie:
         """Initialize a new movie."""
         self.title = title
         self.price_strategy = price_strategy  # get_price_code
+        # self.price_code = price_strategy
+
+    def get_price_code(self):
+        return self.price_strategy
 
     # def get_rental_points(self, days_rented: int):
     #     """Get the rental points for renting this movie for a number of days."""
