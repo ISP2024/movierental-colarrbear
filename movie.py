@@ -1,4 +1,5 @@
 from pricing import PriceStrategy, NewRelease, RegularPrice, ChildrensPrice
+from typing import Collection
 
 
 class Movie:
@@ -10,13 +11,17 @@ class Movie:
     REGULAR = RegularPrice()
     CHILDRENS = ChildrensPrice()
 
-    def __init__(self, title: str, price_strategy: PriceStrategy):
+    def __init__(self, title: str, year: int, genre: Collection[str]):
         """Initialize a new movie."""
         self.title = title
-        self.price_strategy = price_strategy
+        self.year = year
+        self.genre = genre
 
-    def get_title(self):
+    def get_title(self) -> str:
         return self.title
 
-    def __str__(self):
-        return self.title
+    def is_genre(self, input_genre: str) -> bool:
+        return input_genre.lower() in self.genre
+
+    def __str__(self) -> str:
+        return f'{self.title} ({self.year})'
