@@ -13,7 +13,7 @@ class Movie:
     def __init__(self, title: str, price_strategy: PriceStrategy):
         """Initialize a new movie."""
         self.title = title
-        self.price_strategy = price_strategy  # get_price_code
+        self.price_strategy = price_strategy
 
     def get_title(self):
         return self.title

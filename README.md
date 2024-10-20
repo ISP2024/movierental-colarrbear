@@ -18,3 +18,18 @@ Before and after each refactoring you should **run the unit tests**.
 
 See [Resources](https://cpske.github.io/ISP/assignment/movierental/movierental-part1#resources) in the assignment description.
 
+## Rationale
+
+### 2.1 what refactoring signs (code smells) suggest this refactoring?
+
+**Feature Envy** --
+The `Rental` class calculates prices and points based on the `Movie` class's pricing code. This means that `Rental` depends on information from `Movie` that it should probably handle itself.
+If we move the pricing code into `Rental`, it won't need to rely on `Movie` as much, and the code will be easier to understand.
+
+### 2.2 what design principle suggests this refactoring? Why?
+
+The **Single Responsibility Principle** (SRP) means that each class should do only one thing. The `Movie` class should only handle information about `movies`, but how much they cost should not include.
+If we move the pricing information and calculations to the `Rental` class, each class will do its own job, making the code easier to understand and maintain.
+
+
+
