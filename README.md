@@ -31,5 +31,9 @@ If we move the pricing code into `Rental`, it won't need to rely on `Movie` as m
 The **Single Responsibility Principle** (SRP) means that each class should do only one thing. The `Movie` class should only handle information about `movies`, but how much they cost should not include.
 If we move the pricing information and calculations to the `Rental` class, each class will do its own job, making the code easier to understand and maintain.
 
+### 5.2 Describe where you implement this method and the reasons for your choice.
 
-
+I've placed `price_code_for_movie` as a top-level function as part of the rental module, which are aligns with 
+* *Low Coupling* -- minimize their (`Movie`, `Rental`) dependencies.
+* *High Cohesion* -- The rental.py module focuses on rental-related functionalities, including price code determination.
+* *Flexibility* -- can potentially reuse `price_code_for_movie` in other parts of code if needed, further promoting loose coupling.
