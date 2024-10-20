@@ -1,21 +1,16 @@
-from pricing import PriceStrategy, NewRelease, RegularPrice, ChildrensPrice
+# from pricing import PriceStrategy, NewRelease, RegularPrice, ChildrensPrice
 from typing import Collection
+from dataclasses import dataclass
 
 
+@dataclass(frozen=True)
 class Movie:
     """
     A movie available for rent.
     """
-
-    NEW_RELEASE = NewRelease()
-    REGULAR = RegularPrice()
-    CHILDRENS = ChildrensPrice()
-
-    def __init__(self, title: str, year: int, genre: Collection[str]):
-        """Initialize a new movie."""
-        self.title = title
-        self.year = year
-        self.genre = genre
+    title: str
+    year: int
+    genre: Collection[str]
 
     def get_title(self) -> str:
         return self.title
