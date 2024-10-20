@@ -1,4 +1,5 @@
 import csv
+import logging
 from typing import Collection
 from dataclasses import dataclass
 
@@ -40,7 +41,7 @@ class MovieCatalog:
         with open(filename, newline='', encoding='utf-8') as file:
             reader = csv.DictReader(file)  # reading line by line
             next(reader)
-            for _, movie_data in enumerate(reader):
+            for line_num, movie_data in enumerate(reader):
                 try:
                     movie = Movie(
                         movie_data['title'],
@@ -49,6 +50,11 @@ class MovieCatalog:
                     )
                     self._movies.append(movie)
                 except (TypeError, ValueError):
+                    format_msg = ",".join(
+                        str(value) for key, value in movie_data.items()
+                        if key != 'id' and value is not None)
+                    logging.error('Line %d: Unrecognized format "%s"',
+                                  line_num + 1, format_msg)
                     continue
 
             return self._movies

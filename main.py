@@ -23,10 +23,13 @@ if __name__ == '__main__':
     # Create a customer with some rentals
     customer = Customer("Edward Snowden")
     days = 1
-    for movie in make_movies():
+    movies = make_movies()  # Store all movies in a list
+
+    for index, movie in enumerate(movies):
         if movie:
             customer.add_rental(Rental(movie, days))
             days = (days + 2) % 5 + 1
         else:
-            print(f"Movie not found in catalog.")
+            print(
+                f"Movie '{['Air', 'Oppenheimer', 'Frozen', 'Bitconned', 'Particle Fever'][index]}' not found in catalog.")
     print(customer.statement())
