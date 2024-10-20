@@ -28,25 +28,29 @@ def make_movies():
 
 if __name__ == '__main__':
     # Create a customer with some rentals
-    # customer = Customer("Edward Snowden")
-    # days = 1
-    # for movie in make_movies():
-    #     customer.add_rental(Rental(movie, days, movie.price_strategy))
-    #     days = (days + 2) % 5 + 1
-    # print(customer.statement())
+    customer = Customer("Edward Snowden")
+    days = 1
+    for movie in make_movies():
+        if movie:
+            customer.add_rental(Rental(movie, days))
+            days = (days + 2) % 5 + 1
+        else:
+            print(f"Movie not found in catalog.")
+    print(customer.statement())
 
     # to check it get the movie or not
     # Get the Singleton Movie Catalog
-    catalog = MovieCatalog()
-    # Get the first movie named 'Mulan'
-    # movie = catalog.get_movie("Mulan")
-    # # Get 'Mulan' released in 1998
-    # old_movie = catalog.get_movie("Mulan", 1998)
-    # print(movie)
-    # print(old_movie)
-    movie = catalog.get_movie("Top Gun: Maverick")
-    # print(movie)
-    days = 4
-    price_code = NEW_RELEASE  # or PriceStrategy.NEW_RELEASE
-    rental = Rental(movie, days, price_code)
-    print(rental.get_price())
+    # catalog = MovieCatalog()
+    # # Get the first movie named 'Mulan'
+    # # movie = catalog.get_movie("Mulan")
+    # # # Get 'Mulan' released in 1998
+    # # old_movie = catalog.get_movie("Mulan", 1998)
+    # # print(movie)
+    # # print(old_movie)
+    # movie = catalog.get_movie("Top Gun: Maverick")
+    # # print(movie)
+    # days = 4
+    # price_code = NEW_RELEASE  # or PriceStrategy.NEW_RELEASE
+    # rental = Rental(movie, days)
+    # print(rental.get_movie())
+    # print(rental.get_price())
