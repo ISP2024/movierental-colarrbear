@@ -40,16 +40,16 @@ class CustomerTest(unittest.TestCase):
 
     def test_total_amount(self):
         self.c.add_rental(Rental(self.new_movie, 1))
-        self.assertEqual(3.00, self.c.total_amount())
+        self.assertEqual(3.00, self.c.get_total_amount())
         self.c.add_rental(Rental(self.regular_movie, 10))
-        self.assertEqual(17.00, self.c.total_amount())
+        self.assertEqual(17.00, self.c.get_total_amount())
         self.c.add_rental(Rental(self.childrens_movie, 4))
-        self.assertEqual(20.00, self.c.total_amount())
+        self.assertEqual(20.00, self.c.get_total_amount())
 
     def test_get_rental_points(self):
         self.c.add_rental(Rental(self.new_movie, 1))
-        self.assertEqual(1, self.c.total_rental_points())
+        self.assertEqual(1, self.c.get_total_rental_points())
         self.c.add_rental(Rental(self.regular_movie, 10))
-        self.assertEqual(2, self.c.total_rental_points())
+        self.assertEqual(2, self.c.get_total_rental_points())
         self.c.add_rental(Rental(self.childrens_movie, 4))
-        self.assertEqual(3, self.c.total_rental_points())
+        self.assertEqual(3, self.c.get_total_rental_points())
