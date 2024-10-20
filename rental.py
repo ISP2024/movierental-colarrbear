@@ -1,4 +1,18 @@
-from pricing import PriceStrategy
+from pricing import PriceStrategy, NewRelease, RegularPrice, ChildrensPrice
+from datetime import datetime
+from movie import Movie
+
+
+def price_code_for_movie(movie: Movie) -> PriceStrategy:
+    """Return the price code for a movie based on its year and genres."""
+    current_year = datetime.now().year
+    if movie.year == current_year:
+        return NewRelease()
+    elif any(genre.lower() in ["children", "childrens"] for genre in
+             movie.genres):
+        return ChildrensPrice()
+    else:
+        return RegularPrice()
 
 
 class Rental:

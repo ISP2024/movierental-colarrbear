@@ -56,7 +56,15 @@ class ChildrensPrice(PriceStrategy):
         return 1
 
     def get_price(self, days):
-        """Children's rentals cost $1.5 for the first 3 days, then $1.5 per day."""
+        """
+        Children's rentals cost $1.5 for the first 3 days,
+        then $1.5 per day.
+        """
         if days <= 3:
             return 1.5
         return 1.5 + (days - 3) * 1.5
+
+
+NEW_RELEASE = NewRelease()
+REGULAR = RegularPrice()
+CHILDREN = ChildrensPrice()

@@ -5,6 +5,8 @@ from movie import Movie, MovieCatalog
 from rental import Rental
 from customer import Customer
 
+from pricing import PriceStrategy, NEW_RELEASE
+
 
 def make_movies():
     """Some sample movies."""
@@ -42,7 +44,9 @@ if __name__ == '__main__':
     # old_movie = catalog.get_movie("Mulan", 1998)
     # print(movie)
     # print(old_movie)
-    movie = catalog.get_movie("No Time to Die")
-    if not movie:
-        print("Sorry, couldn't find that movie.")
-    print(movie)
+    movie = catalog.get_movie("Top Gun: Maverick")
+    # print(movie)
+    days = 4
+    price_code = NEW_RELEASE  # or PriceStrategy.NEW_RELEASE
+    rental = Rental(movie, days, price_code)
+    print(rental.get_price())
