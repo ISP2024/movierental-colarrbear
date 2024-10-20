@@ -8,19 +8,23 @@ class RentalTest(unittest.TestCase):
 
     def setUp(self):
         """Create some movies for testing"""
-        self.new_movie = Movie("Dune: Part Two", Movie.NEW_RELEASE)
-        self.regular_movie = Movie("Air", Movie.REGULAR)
-        self.childrens_movie = Movie("Frozen", Movie.CHILDRENS)
+        # self.new_movie = Movie("Dune: Part Two", Movie.NEW_RELEASE)
+        # self.regular_movie = Movie("Air", Movie.REGULAR)
+        # self.childrens_movie = Movie("Frozen", Movie.CHILDRENS)
+        self.new_movie = Movie("Dune: Part Two", 2024, ["Adventure"])
+        self.regular_movie = Movie("Air", 2021, ["Drama"])
+        self.childrens_movie = Movie("Frozen", 2013, ["Animation", "Childrens"])
 
     def test_movie_attributes(self):
         """trivial test to catch refactoring errors or change in API of Movie"""
-        m = Movie("Air", Movie.REGULAR)
+        m = Movie("Air", 2021, ["Drama"])
         self.assertEqual("Air", m.get_title())
-        self.assertEqual(Movie.REGULAR, m.price_strategy)
-        # self.assertEqual(Movie.REGULAR, m.get_price_code())
+        self.assertTrue(m.is_genre("Drama"))
+        self.assertFalse(m.is_genre("Action"))
 
     def test_rental_price(self):
         """Test the price calculation for each movie type"""
+        # new release
         rental = Rental(self.new_movie, 1)
         self.assertEqual(rental.get_price(), 3.0)
         rental = Rental(self.new_movie, 5)
