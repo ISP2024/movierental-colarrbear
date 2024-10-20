@@ -1,5 +1,4 @@
 import csv
-from pricing import NewRelease, RegularPrice, ChildrensPrice
 from typing import Collection
 from dataclasses import dataclass
 

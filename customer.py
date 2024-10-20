@@ -53,7 +53,9 @@ class Customer:
         return statement
 
     def get_total_amount(self):
+        """Return the total price of all rentals for this customer."""
         return sum([rental.get_price() for rental in self.rentals])
 
     def get_total_rental_points(self):
+        """Return the total frequent renter points for this customer."""
         return sum([rental.get_rental_points() for rental in self.rentals])

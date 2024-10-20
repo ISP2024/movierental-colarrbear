@@ -35,15 +35,19 @@ class Rental:
         self.price_code = price_code_for_movie(movie)
 
     def get_price_code(self):
+        """Return the price code for this rental."""
         return self.price_code
 
     def get_movie(self):
+        """Return the movie for this rental."""
         return self.movie
 
     def get_days_rented(self):
+        """Return the number of days this movie was rented."""
         return self.days_rented
 
     def get_price(self):
+        """compute the price of the rental based on movie price code"""
         return self.price_code.get_price(self.days_rented)
 
     def get_rental_points(self):
